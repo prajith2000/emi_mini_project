@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+   <link rel="stylesheet" href="bootstrap.css">
+   <link rel="stylesheet" href="bootstrap-icons-1.11.3/font/bootstrap-icons.css"> 
+   <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+  
+    body {
+      background-image: url('https://img.freepik.com/free-photo/calculator-money-notepad-keyboard-yellow-background-flat-lay_169016-24505.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+  
+    h2 {
+      color: red;
+      text-align: center;
+      padding: 15px;
+      font-size: 2em;
+    }
+  
+    h4 {
+      color: blue;
+      font-weight: bold;
+      text-align: center;
+      font-size: 1.2em;
+    }
+  
+    .emi-container {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 20px auto;
+      max-width: 960px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+  
+    input[type="text"] {
+      width: 100%;
+      padding: 6px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+  
+    input[type="range"] {
+      width: 100%;
+    }
+  
+    .range-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+    }
+  
+    @media (max-width: 992px) {
+      h2 {
+        font-size: 1.7em;
+      }
+  
+      .emi-container {
+        padding: 15px;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      h2 {
+        font-size: 1.4em;
+      }
+  
+      .row > .col {
+        margin-bottom: 15px;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      h2 {
+        font-size: 1.2em;
+      }
+  
+      h4 {
+        font-size: 1em;
+      }
+  
+      .emi-container {
+        padding: 10px;
+      }
+  
+      button {
+        width: 100%;
+      }
+    }
+  </style>
+  
+   
+  
+   
+  
+   
+   
+      
+  
+   
+  
+
+    <script>
+      function AmountChange(){
+        document.getElementById("txtAmount").value=document.getElementById("rangeAmount").value;
+      }
+      function YearChange(){
+        document.getElementById("txtYears").value=document.getElementById("rangeYears").value;
+      }
+      function RateChange(){
+        document.getElementById("txtRate").value=document.getElementById("rangeRate").value;
+      }
+      function calculateClick() {
+       var p = parseInt(document.getElementById("txtAmount").value);
+       var n = parseInt(document.getElementById("txtYears").value) * 12;
+       var r = parseFloat(document.getElementById("txtRate").value) / 12 / 100;
+
+      
+       var EMI = (p * r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+
+        
+        document.getElementById("result").innerHTML =
+         "Monthly Installment for your amount &#8377;" + p + " for " + n + " months is &#8377;" + "<b>" + Math.round(EMI) + "</b>";
+      }
+
+    </script>
+</head>
+<body class="container-fluid">
+    <h2>EMI Calculator</h2>
+    <div class="border border-4 p-3 border-dark">
+        <div class="row">
+            <div class="col">
+                 Amount You Need &#8377; <input type="text" id="txtAmount">
+            </div>
+            <div class="col">
+                for <input type="text" size="2" id="txtYears"> years 
+            </div>
+            <div class="col">
+                Interest Rate <input type="text" id="txtRate" size="4"> %
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                &#8377; 50000 <input type="range" onchange="AmountChange()" id="rangeAmount" min="50000" max="1000000" id="rangeAmount"> &#8377; 10,00,000
+            </div>
+            <div class="col">
+                1 year <input type="range" onchange="YearChange()" min="1" max="5" id="rangeYears"> 5 years
+            </div>
+            <div class="col">
+                10% <input type="range" onchange="RateChange()" min="10" max="21" id="rangeRate"> 21%
+
+            </div>
+
+        </div>
+        <div class="row mt-3 text-center">
+            <div class="col">
+                <button class="btn btn-primary" onclick="calculateClick()">Calculate</button>
+
+            </div>
+
+        </div>
+        <div class="text-center mt-3">
+            <h4 id="result"></h4>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="jquery.js"></script>
+    <script src="bootstrap.bundle.js"></script>
+</body>
+</html>
